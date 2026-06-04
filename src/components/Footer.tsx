@@ -3,81 +3,51 @@ export function Footer() {
     <footer className="py-16 md:py-24 border-t border-border">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
-          {/* Brand */}
           <div className="md:col-span-2">
             <a href="/" className="inline-block mb-6">
-              <img src="/images/hously-logo.svg" alt="Пространство" width={120} height={32} className="w-auto h-6" />
+              <span className="font-bold text-2xl tracking-tight" style={{ fontFamily: "'Exo 2', sans-serif" }}>
+                турбо<span className="text-green-500">.</span>
+              </span>
             </a>
             <p className="text-muted-foreground leading-relaxed max-w-sm">
-              Создаем пространства для жизни. Архитектурный опыт, где форма, свет и намерение встречаются.
+              Сервис аренды самокатов. Движение — это просто! Доступно, удобно и выгодно в любой точке города.
             </p>
           </div>
 
-          {/* Navigation */}
           <div>
-            <h4 className="text-sm font-medium mb-4">Студия</h4>
+            <h4 className="text-sm font-semibold mb-4">Навигация</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li>
-                <a href="#projects" className="hover:text-foreground transition-colors">
-                  Проекты
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="hover:text-foreground transition-colors">
-                  О нас
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="hover:text-foreground transition-colors">
-                  Услуги
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="hover:text-foreground transition-colors">
-                  Контакты
-                </a>
-              </li>
+              <li><a href="#promos" className="hover:text-foreground transition-colors">Акции</a></li>
+              <li><a href="/booking" className="hover:text-foreground transition-colors">Бронирование</a></li>
+              <li><a href="/parkings" className="hover:text-foreground transition-colors">Парковки</a></li>
+              <li><a href="/profile" className="hover:text-foreground transition-colors">Личный кабинет</a></li>
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="text-sm font-medium mb-4">Связь</h4>
+            <h4 className="text-sm font-semibold mb-4">Контакты</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
-                <a href="mailto:hello@prostranstvo.ru" className="hover:text-foreground transition-colors">
-                  hello@prostranstvo.ru
+                <a href="tel:88001111111" className="hover:text-foreground transition-colors">
+                  8 (800) 111-11-11
                 </a>
               </li>
               <li>
-                <a href="tel:+74951234567" className="hover:text-foreground transition-colors">
-                  +7 (495) 123-45-67
+                <a href="mailto:hello@turbo.ru" className="hover:text-foreground transition-colors">
+                  hello@turbo.ru
                 </a>
               </li>
-              <li>
-                <a href="#" className="hover:text-foreground transition-colors">
-                  Телеграм
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-foreground transition-colors">
-                  ВКонтакте
-                </a>
-              </li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Телеграм</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">ВКонтакте</a></li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row md:items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© 2025 Пространство. Все права защищены.</p>
+          <p>© 2025 Турбо. Все права защищены.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground transition-colors">
-              Политика конфиденциальности
-            </a>
-            <a href="#" className="hover:text-foreground transition-colors">
-              Условия использования
-            </a>
+            <a href="#" className="hover:text-foreground transition-colors">Политика конфиденциальности</a>
+            <a href="#" className="hover:text-foreground transition-colors">Условия использования</a>
           </div>
         </div>
       </div>

@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react"
-import { ArrowDown } from "lucide-react"
+import Icon from "@/components/ui/icon"
 
 export function Hero() {
   const contentRef = useRef<HTMLDivElement>(null)
   const heroRef = useRef<HTMLElement>(null)
-  const titleRef = useRef<HTMLHeadingElement>(null)
   const [animationProgress, setAnimationProgress] = useState(0)
   const [animationComplete, setAnimationComplete] = useState(false)
   const accumulatedScrollRef = useRef(0)
@@ -14,19 +13,12 @@ export function Hero() {
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       const atTopOfPage = window.scrollY === 0
-
       if (atTopOfPage && !animationComplete) {
         e.preventDefault()
-
         accumulatedScrollRef.current = Math.max(0, Math.min(700, accumulatedScrollRef.current + e.deltaY))
-
         const newProgress = Math.max(0, Math.min(1, accumulatedScrollRef.current / 700))
         setAnimationProgress(newProgress)
-
-        if (newProgress >= 1) {
-          setAnimationComplete(true)
-        }
-
+        if (newProgress >= 1) setAnimationComplete(true)
         if (contentRef.current) {
           const translateY = newProgress * 200
           const rotationX = newProgress * 45
@@ -35,16 +27,10 @@ export function Hero() {
         }
       } else if (atTopOfPage && animationComplete && e.deltaY < 0) {
         e.preventDefault()
-
         accumulatedScrollRef.current = Math.max(0, Math.min(700, accumulatedScrollRef.current + e.deltaY))
-
         const newProgress = Math.max(0, Math.min(1, accumulatedScrollRef.current / 700))
         setAnimationProgress(newProgress)
-
-        if (newProgress < 1) {
-          setAnimationComplete(false)
-        }
-
+        if (newProgress < 1) setAnimationComplete(false)
         if (contentRef.current) {
           const translateY = newProgress * 200
           const rotationX = newProgress * 45
@@ -63,37 +49,12 @@ export function Hero() {
       const atTopOfPage = window.scrollY === 0
       const currentTouchY = e.touches[0].clientY
       const deltaY = lastTouchY.current - currentTouchY
-
       if (atTopOfPage && !animationComplete) {
         e.preventDefault()
-
         accumulatedScrollRef.current = Math.max(0, Math.min(700, accumulatedScrollRef.current + deltaY * 3))
-
         const newProgress = Math.max(0, Math.min(1, accumulatedScrollRef.current / 700))
         setAnimationProgress(newProgress)
-
-        if (newProgress >= 1) {
-          setAnimationComplete(true)
-        }
-
-        if (contentRef.current) {
-          const translateY = newProgress * 200
-          const rotationX = newProgress * 45
-          const scale = 1 - newProgress * 0.3
-          contentRef.current.style.transform = `translateY(${translateY}px) rotateX(${rotationX}deg) scale(${scale})`
-        }
-      } else if (atTopOfPage && animationComplete && deltaY < 0) {
-        e.preventDefault()
-
-        accumulatedScrollRef.current = Math.max(0, Math.min(700, accumulatedScrollRef.current + deltaY * 3))
-
-        const newProgress = Math.max(0, Math.min(1, accumulatedScrollRef.current / 700))
-        setAnimationProgress(newProgress)
-
-        if (newProgress < 1) {
-          setAnimationComplete(false)
-        }
-
+        if (newProgress >= 1) setAnimationComplete(true)
         if (contentRef.current) {
           const translateY = newProgress * 200
           const rotationX = newProgress * 45
@@ -101,14 +62,12 @@ export function Hero() {
           contentRef.current.style.transform = `translateY(${translateY}px) rotateX(${rotationX}deg) scale(${scale})`
         }
       }
-
       lastTouchY.current = currentTouchY
     }
 
     window.addEventListener("wheel", handleWheel, { passive: false })
     window.addEventListener("touchstart", handleTouchStart, { passive: false })
     window.addEventListener("touchmove", handleTouchMove, { passive: false })
-
     return () => {
       window.removeEventListener("wheel", handleWheel)
       window.removeEventListener("touchstart", handleTouchStart)
@@ -117,18 +76,37 @@ export function Hero() {
   }, [animationComplete])
 
   return (
-    <section id="hero" ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/images/hously-background.png"
-          alt="Минималистичный архитектурный интерьер"
-          className="w-full h-full object-cover object-center"
+    <section
+      id="hero"
+      ref={heroRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f2010 100%)" }}
+    >
+      {/* Animated background circles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute rounded-full opacity-10"
+          style={{
+            width: "600px", height: "600px",
+            background: "radial-gradient(circle, #4ade80, transparent)",
+            top: "-100px", right: "-100px",
+            animation: "pulse 4s ease-in-out infinite",
+          }}
+        />
+        <div
+          className="absolute rounded-full opacity-5"
+          style={{
+            width: "400px", height: "400px",
+            background: "radial-gradient(circle, #4ade80, transparent)",
+            bottom: "100px", left: "-50px",
+            animation: "pulse 6s ease-in-out infinite 2s",
+          }}
         />
       </div>
 
       <div
         ref={contentRef}
-        className="container mx-auto px-6 md:px-12 lg:pt-0 relative z-10 pb-0 pl-1 pr-1 pt-8 md:pt-0"
+        className="container mx-auto px-6 md:px-12 relative z-10 pt-8 md:pt-0"
         style={{
           willChange: "transform",
           transform: "translateY(0px)",
@@ -136,31 +114,41 @@ export function Hero() {
           transformStyle: "preserve-3d",
         }}
       >
-        <div className="mb-72 md:mb-60 lg:mb-80">
-          <p className="text-sm tracking-[0.3em] uppercase text-center text-secondary mb-0">{"Архитектурная студия"}</p>
+        <div className="mb-72 md:mb-60 lg:mb-80 text-center">
+          <p className="text-sm tracking-[0.3em] uppercase text-center text-green-400 mb-4 font-medium">
+            Сервис аренды самокатов
+          </p>
 
-          <h1
-            ref={titleRef}
-            className="text-7xl font-medium text-balance text-center text-white mb-0 tracking-tight leading-[0.9] lg:text-8xl"
-          >
-            {"Создаем пространства"}
-            <br />
-            <span className="text-orange-200">{"для жизни"}</span>
+          <h1 className="text-7xl font-extrabold text-balance text-center text-white mb-6 tracking-tight leading-[0.9] lg:text-8xl">
+            Движение —<br />
+            <span className="text-green-400">это просто!</span>
           </h1>
-        </div>
-      </div>
 
-      <div className="absolute inset-0 z-20 pointer-events-none">
-        <img
-          src="/images/hously-foreground.png"
-          alt="Мраморная кухонная столешница"
-          className="w-full h-full object-cover object-center"
-        />
+          <p className="text-white/60 text-lg md:text-xl max-w-xl mx-auto mb-10 font-light">
+            Аренда самокатов в любой точке города. Выбери, поедь, наслаждайся!
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/booking"
+              className="inline-flex items-center justify-center gap-2 bg-green-400 text-primary font-bold px-8 py-4 rounded-xl text-base hover:bg-green-300 transition-all duration-300 hover:scale-105"
+            >
+              <Icon name="Zap" size={20} />
+              Найти самокат
+            </a>
+            <a
+              href="#about"
+              className="inline-flex items-center justify-center gap-2 border border-white/20 text-white px-8 py-4 rounded-xl text-base hover:bg-white/10 transition-all duration-300"
+            >
+              Узнать больше
+            </a>
+          </div>
+        </div>
       </div>
 
       {animationComplete && (
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce z-30">
-          <ArrowDown className="w-5 h-5 text-muted-foreground" />
+          <Icon name="ArrowDown" size={20} className="text-white/50" />
         </div>
       )}
     </section>

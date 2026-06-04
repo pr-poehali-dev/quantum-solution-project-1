@@ -1,25 +1,22 @@
 import { useEffect, useRef, useState } from "react"
 import { HighlightedText } from "./HighlightedText"
 
-const philosophyItems = [
+const steps = [
   {
-    title: "Минимализм со смыслом",
-    description:
-      "Каждый элемент имеет свое назначение и пространство для дыхания. Мы убираем лишнее, чтобы раскрыть то, что действительно важно.",
+    title: "Подобрать самокат",
+    description: "Выбирай из двухколёсных и трёхколёсных моделей. Удобный фильтр поможет найти идеальный вариант прямо рядом с тобой.",
   },
   {
-    title: "Архитектурный подход",
-    description:
-      "Планировки, вдохновленные структурой, ритмом и материальностью. Здания, которые говорят через пропорции и свет.",
+    title: "Выбрать место, время и дату",
+    description: "Бронируй заранее или прямо сейчас. Укажи адрес ближайшей парковки, дату и время — всё займёт меньше минуты.",
   },
   {
-    title: "Естественная динамика",
-    description:
-      "Движение поддерживает восприятие, но никогда не отвлекает. Анимация, которая ощущается естественно, как свет, скользящий по комнате.",
+    title: "Выбрать удобный тариф",
+    description: "Тарифы от 6 рублей в минуту. Чем дольше аренда — тем выгоднее: скидка до 25% при бронировании от 3 часов.",
   },
   {
-    title: "Вневременная эстетика",
-    description: "Элегантный, спокойный и долговечный визуальный язык. Дизайн, который превосходит тренды и стареет с достоинством.",
+    title: "Удобная система оплаты",
+    description: "Привяжи банковскую карту и оплачивай мгновенно. Вся история поездок и чеки — в личном кабинете.",
   },
 ]
 
@@ -39,48 +36,44 @@ export function Philosophy() {
       },
       { threshold: 0.3 },
     )
-
-    itemRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref)
-    })
-
+    itemRefs.current.forEach((ref) => { if (ref) observer.observe(ref) })
     return () => observer.disconnect()
   }, [])
 
   return (
-    <section id="about" className="py-32 md:py-29">
+    <section id="about" className="py-32 md:py-24">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-          {/* Left column - Title and image */}
           <div className="lg:sticky lg:top-32 lg:self-start">
-            <p className="text-muted-foreground text-sm tracking-[0.3em] uppercase mb-6">Наша философия</p>
-            <h2 className="text-6xl md:text-6xl font-medium leading-[1.15] tracking-tight mb-6 text-balance lg:text-8xl">
-              Дизайн с
+            <p className="text-muted-foreground text-sm tracking-[0.3em] uppercase mb-6">Как это работает</p>
+            <h2 className="text-6xl md:text-6xl font-extrabold leading-[1.1] tracking-tight mb-6 text-balance lg:text-7xl">
+              Аренда за
               <br />
-              <HighlightedText>намерением</HighlightedText>
+              <HighlightedText>4 шага</HighlightedText>
             </h2>
 
-            <div className="relative hidden lg:block">
-              <img
-                src="/images/exterior.png"
-                alt="Архитектурный эскиз рабочего пространства"
-                className="opacity-90 relative z-10 w-auto"
-              />
+            <div className="relative hidden lg:block mt-8">
+              <div
+                className="w-full h-64 rounded-2xl flex items-center justify-center"
+                style={{ background: "linear-gradient(135deg, #0f172a, #1e293b)" }}
+              >
+                <div className="text-center">
+                  <div className="text-8xl mb-4">🛴</div>
+                  <p className="text-white/60 text-sm">Турбо — едем с удовольствием</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Right column - Description and Philosophy items */}
           <div className="space-y-6 lg:pt-48">
             <p className="text-muted-foreground text-lg leading-relaxed max-w-md mb-12">
-              Архитектура - это больше, чем конструкция. Это то, как мы воспринимаем мир. Мы создаем пространства, которые питают человеческий дух.
+              Турбо — это быстро, удобно и выгодно. Никаких очередей, никаких залогов — просто выбери самокат и поехали!
             </p>
 
-            {philosophyItems.map((item, index) => (
+            {steps.map((item, index) => (
               <div
                 key={item.title}
-                ref={(el) => {
-                  itemRefs.current[index] = el
-                }}
+                ref={(el) => { itemRefs.current[index] = el }}
                 data-index={index}
                 className={`transition-all duration-700 ${
                   visibleItems.includes(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -88,9 +81,9 @@ export function Philosophy() {
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="flex gap-6">
-                  <span className="text-muted-foreground/50 text-sm font-medium">0{index + 1}</span>
+                  <span className="text-green-500/70 text-sm font-bold mt-1">0{index + 1}</span>
                   <div>
-                    <h3 className="text-xl font-medium mb-3">{item.title}</h3>
+                    <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                     <p className="text-muted-foreground leading-relaxed">{item.description}</p>
                   </div>
                 </div>
